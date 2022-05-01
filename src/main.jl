@@ -45,6 +45,6 @@ ray = Ray(a, b)
 println("Vector A: ", a)
 println("Dot A B ", dot(a, b))
 
-save("rendered/image2.png", image)
+save("rendered/image3.png", image)
 
 end

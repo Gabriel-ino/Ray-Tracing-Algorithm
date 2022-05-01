@@ -17,15 +17,16 @@ end
 function hit(s::Sphere, ray::Ray)
     # bhaskara
     a = normsquared(ray.direction)
-    oc = s.center - ray.origin
-    b = 2.0 * dot(ray.direction, oc)
+    oc = ray.origin - s.center
+    halfb = dot(ray.direction, oc)
     c = normsquared(oc) - s.radius^2
-    discriminant = b^2 - 4 * a * c
+    discriminant = halfb * halfb - a * c
     if discriminant <= 0
-        return false
+        return -1.0
     end
-    true
-
+    
+    (-halfb  - √discriminant)/a
+      
 end
 
 

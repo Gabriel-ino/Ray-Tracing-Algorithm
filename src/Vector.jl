@@ -31,4 +31,7 @@ function Ray(org::Vec3{T}, dir::Vec3{T}) where T
     Ray{T}(org, dir)
 end
 
+function rayAt(ray::Ray, t)
+    ray.origin + t * ray.direction
+end
 

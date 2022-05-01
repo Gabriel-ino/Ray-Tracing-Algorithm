@@ -8,8 +8,14 @@ function backgroundColor(dir)
 end
 
 function rayColor(ray::Ray, sphere::Sphere)
-    if hit(sphere, ray)
-        return RGB(1.0, 0.0, 0.0)
+    t = hit(sphere, ray)
+
+    if t > 0.0
+        # Intersection
+        p = rayAt(ray, t)
+        normal = unitvector(p - sphere.center)
+        ncolor = 0.5 * (normal .+ 1.0)
+        return RGB(ncolor...)
     end
     backgroundColor(ray.direction)
 end
