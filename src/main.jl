@@ -25,6 +25,7 @@ image = RGB.(zeros(IMHEIGHT, IMWIDTH))
 
 println("Image Size: $IMWIDTH x $IMHEIGHT")
 
+s1 = Sphere(Vec3(0.0, 0.0, -1.0), 0.5)
 for j = 1:IMHEIGHT
     for i = 1:IMWIDTH
         u = (i - 1)/(IMWIDTH-1)
@@ -32,7 +33,7 @@ for j = 1:IMHEIGHT
         direction = LOWERLEFTCORNER + u * HORIZONTAL + v * VERTICAL - ORIGIN
         ray = Ray(ORIGIN, direction)
 
-        image[j, i] = rayColor(ray)
+        image[j, i] = rayColor(ray, s1)
     end
 end # Looping all positions in image's matrix
 
@@ -44,6 +45,6 @@ ray = Ray(a, b)
 println("Vector A: ", a)
 println("Dot A B ", dot(a, b))
 
-save("rendered/image1.png", image)
+save("rendered/image2.png", image)
 
 end
