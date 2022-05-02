@@ -5,6 +5,7 @@ module raytracing
 using Images
 include("./Vector.jl")
 include("rayColor.jl")
+include("Scene.jl")
 
 # IMAGE
 const ASPECTRATIO = 16/9
@@ -26,6 +27,12 @@ image = RGB.(zeros(IMHEIGHT, IMWIDTH))
 println("Image Size: $IMWIDTH x $IMHEIGHT")
 
 s1 = Sphere(Vec3(0.0, 0.0, -1.0), 0.5)
+const BIGRADIUS = 1000.0
+floor = Sphere(Vec3(0.0, -BIGRADIUS - 0.5, -1.0), BIGRADIUS)
+
+world = SceneList()
+push!(world, s1)
+push!(world, floor)
 for j = 1:IMHEIGHT
     for i = 1:IMWIDTH
         u = (i - 1)/(IMWIDTH-1)
@@ -33,7 +40,7 @@ for j = 1:IMHEIGHT
         direction = LOWERLEFTCORNER + u * HORIZONTAL + v * VERTICAL - ORIGIN
         ray = Ray(ORIGIN, direction)
 
-        image[j, i] = rayColor(ray, s1)
+        image[j, i] = rayColor(ray, world)
     end
 end # Looping all positions in image's matrix
 
@@ -45,6 +52,6 @@ ray = Ray(a, b)
 println("Vector A: ", a)
 println("Dot A B ", dot(a, b))
 
-save("rendered/image3.png", image)
+save("rendered/image4.png", image)
 
 end
