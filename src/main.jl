@@ -26,12 +26,18 @@ image = RGB.(zeros(IMHEIGHT, IMWIDTH))
 
 println("Image Size: $IMWIDTH x $IMHEIGHT")
 
-s1 = Sphere(Vec3(0.0, 0.0, -1.0), 0.5)
+s1 = Sphere(Vec3(0.0, 0.0, -1.5), 0.5)
+s2 = Sphere(Vec3(-1.0, 0.0, -2.0), 0.5)
+s3 = Sphere(Vec3(0.5, 1.5, -1.5), 0.5)
+s4 = Sphere(Vec3(1.5, 0.2, -1.0), 0.5)
 const BIGRADIUS = 1000.0
 floor = Sphere(Vec3(0.0, -BIGRADIUS - 0.5, -1.0), BIGRADIUS)
 
 world = SceneList()
 push!(world, s1)
+push!(world, s2)
+push!(world, s3)
+push!(world, s4)
 push!(world, floor)
 for j = 1:IMHEIGHT
     for i = 1:IMWIDTH
@@ -52,6 +58,6 @@ ray = Ray(a, b)
 println("Vector A: ", a)
 println("Dot A B ", dot(a, b))
 
-save("rendered/image4.png", image)
+save("rendered/image8.png", image)
 
 end
